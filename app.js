@@ -18,6 +18,11 @@ app.use((req, res, next) => {
 
 app.use(creditCardRoutes);
 
+app.use((error, req, res, next) => {
+    console.log(error);
+    res.status(500).json(error);
+  })
+
 mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.xixpf9s.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`)
 .then(resutl => {
     app.listen(3000);
