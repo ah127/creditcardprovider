@@ -1,7 +1,11 @@
+const Card = require('../models/card');
+
 exports.getCreditCards = (req, res, next) => {
-    res.status(200).json({
-        cards: [{personName: "Kumar Yogi",cardNumber: "411111111111",expiryDate: "2025-01-30",cvcNumber: "422"}]
-    });
+    Card.find()
+        .then(cards => {
+            console.log(cards);
+            res.status(200).json(cards);
+        })
 }
 
 exports.createCreditCards = (req, res, next) => {
@@ -9,11 +13,28 @@ exports.createCreditCards = (req, res, next) => {
     const personName = req.body.fullName;
     const expiryDate = req.body.expiryDate;
     const cvcNumber = req.body.cvcNumber;
+    const limit = req.body.limit;
+
+    const card = new Card({
+        personName : personName,
+        cardNumber : cardNumber,
+        expiryDate : expiryDate,
+        cvcNumber: cvcNumber,
+        balance: balance,
+        limit: limit
+    })
 
     //create cards in database
-    res.status(201).json({
-        message: 'Card created successfully!',
-        card: {id: new Date().toISOString(), personName: personName, cardNumber: cardNumber, expiryDate:expiryDate, cvc: cvcNumber}
-    })
+    card
+        .save()
+        .then(result => {
+            console.log('Create Card');
+            console.log(result);
+            res.status(201).json({
+                message: 'Card created successfully!',
+                cardDetails: card
+            })
+
+        })
 }
 
