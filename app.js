@@ -1,5 +1,7 @@
 const express = require('express');
+const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
+require('dotenv').config();
 
 const app = express();
 
@@ -16,6 +18,10 @@ app.use((req, res, next) => {
 
 app.use(creditCardRoutes);
 
-app.listen(3000,()=>{
-    console.log("app is running");
+mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.xixpf9s.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`)
+.then(resutl => {
+    app.listen(3000);
 })
+.catch(err => {
+    console.log(err);
+});
