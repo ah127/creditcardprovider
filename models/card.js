@@ -7,7 +7,7 @@ const cardSchema = new Schema({
         required: true
     },
     cardNumber: {
-        type: String,
+        type: Number,
         required: true
     },
     cvcNumber: {
@@ -20,7 +20,8 @@ const cardSchema = new Schema({
     },
     balance: {
         type: Number,
-        required: true
+        required: true,
+        default:0
     },
     limit: {
         type: Number,
