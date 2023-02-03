@@ -27,8 +27,9 @@ app.use((error, req, res, next) => {
   //database connection
 mongoose.connect(`mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@cluster0.xixpf9s.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`)
 .then(resutl => {
+    console.log('Database connected')
     app.listen(process.env.PORT || 3000);
 })
 .catch(err => {
-    console.log(err);
+    console.log(err.message);
 });
