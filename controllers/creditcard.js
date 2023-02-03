@@ -19,10 +19,11 @@ exports.createCreditCards = (req, res, next) => {
     const balance = req.body.balance;
     const limit = req.body.limit;
 
-    if(cardValidator.isNumber(cardNumber) && cardValidator.isNumber(cvcNumber) && cardValidator.isNumber(balance ) && cardValidator.isNumber(limit)){
-        const numberValidation = valid.number(cardNumber);
-        console.log(numberValidation);
-        if(numberValidation.isValid) {
+    if(cardValidator.isNumber(cardNumber)  && cardValidator.isNumber(balance ) && cardValidator.isNumber(limit)){
+        // const numberValidation = valid.number(cardNumber);
+        // console.log(numberValidation);
+
+        if(cardValidator.checkCardValidity(cardNumber)) {
             const card = new Card({
                 personName : personName,
                 cardNumber : cardNumber,
@@ -40,13 +41,20 @@ exports.createCreditCards = (req, res, next) => {
                 cardDetails: card
             })
 
-    })
-    } else {
-        res.status(400).json({
+             })
+        } else {
+            res.status(400).json({
             "type":"error",
-            'message' : 'The credit card you have entered is invalid'
-        })
-    }
+            'message' : 'The credit card you have entered is invalid'})
+        }
+        // if(numberValidation.isValid) {
+           
+    // } else {
+    //     res.status(400).json({
+    //         "type":"error",
+    //         'message' : 'The credit card you have entered is invalid'
+    //     })
+    // }
     } else {
         res.status(400).json({
             "type":"error",
