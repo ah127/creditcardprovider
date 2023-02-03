@@ -4,13 +4,20 @@ const { validationResult } = require('express-validator');
 const cardValidator = require('../utils/cardValidator');
 const card = require('../models/card');
 
+//@desc - get list of creditcards
+//@route -GET /cards
+//@access - public
+
 exports.getCreditCards = (req, res, next) => {
     Card.find()
         .then(cards => {
-            // console.log(cards);
             res.status(200).json(cards);
         })
 }
+
+//@desc - create a credit Card
+//@route -POST /cards
+//@access - public
 
 exports.createCreditCards = (req, res, next) => {
     const cardNumber = req.body.cardNumber;
@@ -19,6 +26,8 @@ exports.createCreditCards = (req, res, next) => {
     const cvcNumber = req.body.cvcNumber;
     const balance = req.body.balance;
     const limit = req.body.limit;
+    
+    // Finds the validation errors in this request and wraps them in an object with handy functions
 
     const errors = validationResult(req);
 
