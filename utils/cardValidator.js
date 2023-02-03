@@ -1,9 +1,3 @@
-exports.isNumber = (passedValue) => {
-    if(typeof passedValue === "number") {
-        return true;
-    }
-}
-
 //custom creditcard number Validator function using Luhn 10 algorith
 exports.checkCardValidity=(num)=>{
     //convert the given number value into string and split to store in array

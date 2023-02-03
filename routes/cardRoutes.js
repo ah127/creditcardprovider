@@ -3,7 +3,7 @@ const { body, check } = require('express-validator');
 
 const router = express.Router();
 
-const creditCardController = require('../controllers/creditcard');
+const creditCardController = require('../controllers/cardController');
 
 router.get('/cards', creditCardController.getCreditCards);
 

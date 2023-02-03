@@ -1,7 +1,7 @@
 const Card = require('../models/card');
 const valid = require('card-validator');
 const { validationResult } = require('express-validator');
-const cardValidator = require('../utils/helper');
+const cardValidator = require('../utils/cardValidator');
 const card = require('../models/card');
 
 exports.getCreditCards = (req, res, next) => {
