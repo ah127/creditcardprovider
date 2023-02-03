@@ -13,8 +13,6 @@ router.post('/cards', [
         .isLength({ max: 19 }),
     body('cvcNumber')
         .isNumeric(),
-    body('balance')
-        .isNumeric(),
     body('limit')
         .isNumeric()
 ], creditCardController.createCreditCards);
