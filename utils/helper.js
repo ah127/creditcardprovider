@@ -1,3 +1,0 @@
-exports.cardNumberChecker = (cardNumber) => {
-        
-}
