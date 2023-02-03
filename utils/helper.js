@@ -4,6 +4,7 @@ exports.isNumber = (passedValue) => {
     }
 }
 
+//custom creditcard number Validator function using Luhn 10 algorith
 exports.checkCardValidity=(num)=>{
     //convert the given number value into string and split to store in array
       var creditcardnum_str=num.toString().split('');

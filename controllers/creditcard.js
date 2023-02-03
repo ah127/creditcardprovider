@@ -1,5 +1,6 @@
 const Card = require('../models/card');
 const valid = require('card-validator');
+const { validationResult } = require('express-validator');
 const cardValidator = require('../utils/helper');
 const card = require('../models/card');
 
@@ -19,10 +20,11 @@ exports.createCreditCards = (req, res, next) => {
     const balance = req.body.balance;
     const limit = req.body.limit;
 
-    if(cardValidator.isNumber(cardNumber)  && cardValidator.isNumber(balance ) && cardValidator.isNumber(limit)){
-        // const numberValidation = valid.number(cardNumber);
-        // console.log(numberValidation);
+    const errors = validationResult(req);
 
+    if (!errors.isEmpty()) {
+        return res.status(400).json({ errors: errors.array() });
+      } else {
         if(cardValidator.checkCardValidity(cardNumber)) {
             const card = new Card({
                 personName : personName,
@@ -47,19 +49,6 @@ exports.createCreditCards = (req, res, next) => {
             "type":"error",
             'message' : 'The credit card you have entered is invalid'})
         }
-        // if(numberValidation.isValid) {
-           
-    // } else {
-    //     res.status(400).json({
-    //         "type":"error",
-    //         'message' : 'The credit card you have entered is invalid'
-    //     })
-    // }
-    } else {
-        res.status(400).json({
-            "type":"error",
-            "message":"One of the value provided is not a number"
-        })
-    }
+      }
 }
 
